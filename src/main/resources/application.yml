@@ -1,0 +1,28 @@
+spring:
+#     Database Config
+  datasource:
+    url: jdbc:postgresql://localhost:5432/elba_proficiency_demo
+    username: postgres
+    password:
+    driver-class-name: org.postgresql.Driver
+
+#     Hibernate Config
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 30
+
+#     Logging
+  logging:
+    level:
+      root: DEBUG
+      org:
+        springframework: DEBUG
+        hibernate:
+          type: DEBUG
