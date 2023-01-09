@@ -13,18 +13,20 @@ public class DepartmentService {
 
     private final DepartmentRepository departmentRepository;
 
-    public DepartmentService(DepartmentRepository departmentRepository){
+    public DepartmentService(DepartmentRepository departmentRepository) {
         this.departmentRepository = departmentRepository;
     }
 
-    public List<Department> saveAll(Iterable<Department> departments){
+    public List<Department> saveAll(Iterable<Department> departments) {
+
         List<Department> exisitngDeplList = departmentRepository.findAll();
         DaoAction daoAction = EntityFilter.filterDuplicateEntities(departments, exisitngDeplList);
+
         departmentRepository.deleteAllInBatch(daoAction.getRowsToDelete());
         return departmentRepository.saveInBatch(daoAction.getRowsToSave());
     }
 
-    public List<Department> findAll(){
+    public List<Department> findAll() {
         return departmentRepository.findAll();
     }
 

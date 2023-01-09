@@ -21,14 +21,11 @@ public class EntityFilter<T> {
         }
 
         for (Object newEntity : newEntityList) {
-
             if (existingEntities.contains(newEntity)) {
-
                 for (int i = 0; i < existingEntities.size(); i++) {
 
                     T existingEntity = existingEntities.get(i);
                     if (newEntity.equals(existingEntity)) {
-
                         if (newEntity instanceof Employee) {
                             Employee existingEmp = (Employee) existingEntity;
                             Employee newEmp = (Employee) newEntity;

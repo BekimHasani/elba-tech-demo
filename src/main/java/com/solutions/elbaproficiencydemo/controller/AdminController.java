@@ -8,7 +8,9 @@ import com.solutions.elbaproficiencydemo.service.ExcelObjectsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -27,8 +29,8 @@ public class AdminController {
     }
 
     @PutMapping("/import")
-    public ResponseEntity<String> saveObjects(@RequestParam(value = "reloadFile", required = false) boolean reloadFile) {
-        excelObjectsService.generateExcelObjects(reloadFile);
+    public ResponseEntity<String> saveObjects(@RequestParam(value = "filePath") String filePath) {
+        excelObjectsService.generateExcelObjects(filePath);
         return new ResponseEntity<>("Entities imported successfully ", HttpStatus.OK);
     }
 

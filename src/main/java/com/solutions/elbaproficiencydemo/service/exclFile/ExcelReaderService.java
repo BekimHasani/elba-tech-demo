@@ -7,6 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,17 +15,12 @@ import java.util.List;
 
 @Service
 public class ExcelReaderService {
-    private FileInputStream file;
     private XSSFWorkbook workbook;
 
-    {
-        file = readExcelFile();
-    }
-
-    private FileInputStream readExcelFile() {
+    private FileInputStream readExcelFile(String filePath) {
         final FileInputStream file;
         try {
-            file = new FileInputStream("/home/bekehasani/Desktop/employees.xlsx");
+            file = new FileInputStream(filePath);
             workbook = new XSSFWorkbook(file);
             workbook.setMissingCellPolicy(Row.MissingCellPolicy.RETURN_NULL_AND_BLANK);
         } catch (IOException e) {
@@ -33,10 +29,8 @@ public class ExcelReaderService {
         return file;
     }
 
-    public List<List<String>> xlsxFileReader(boolean reloadFile) {
-        if (reloadFile) {
-            readExcelFile();
-        }
+    public List<List<String>> xlsxFileReader(String filePath) {
+        readExcelFile(filePath);
         XSSFSheet sheet = workbook.getSheetAt(0);
         List<List<String>> rowValues = new ArrayList<>();
 

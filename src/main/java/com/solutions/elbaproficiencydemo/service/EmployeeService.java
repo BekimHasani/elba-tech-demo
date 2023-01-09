@@ -19,8 +19,10 @@ public class EmployeeService {
 
 
     public List<Employee> saveAll(Iterable<Employee> employees) {
+
         List<Employee> exisitngEmplList = employeeRepository.findAll();
         DaoAction<Employee> daoAction = EntityFilter.filterDuplicateEntities(employees, exisitngEmplList);
+
         employeeRepository.deleteAllInBatch(daoAction.getRowsToDelete());
         return employeeRepository.saveInBatch(daoAction.getRowsToSave());
     }

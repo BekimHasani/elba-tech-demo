@@ -23,8 +23,8 @@ public class ExcelObjectsService {
         this.departmentService = departmentService;
     }
 
-    public void generateExcelObjects(boolean reloadFile){
-        List<List<String>> objects = excelReader.xlsxFileReader(reloadFile);
+    public void generateExcelObjects(String filePath){
+        List<List<String>> objects = excelReader.xlsxFileReader(filePath);
 
         List<Employee> employees = new ArrayList<>();
         List<Department> departments = new ArrayList<>();
@@ -41,6 +41,7 @@ public class ExcelObjectsService {
                 throw new RuntimeException(e);
             }
         }
+
         employeeService.saveAll(employees);
         departmentService.saveAll(departments);
     }
